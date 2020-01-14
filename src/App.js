@@ -1,21 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import axios from axios;
+import axios from 'axios';
 
 
 function App() {
-  const [data, data] = useState([])
+  const [data, setData] = useState([]);
   
+  useEffect(() => {
+    axios.get('https://swapi.co/api/people/1')
+    .then(res => {
+      setData(res.data.results);
+    })
+    .catch(err => console.log(err));
+  }, []);
+
   return (
     <div className="App">
-      
-      {useEffect(() => {
-          axios.get('https://swapi.co/api/people/1')
-          .then(
-            console.log(res.data.results)
-          )
-      })}
+      <p>Loading...</p>
     </div>
   );
 }
